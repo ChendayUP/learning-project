@@ -3,17 +3,21 @@
 
 ## react-admin-project
 学习react项目架构
-**react-admin **
+
+**react-admin**
+
 项目地址 https://github.com/d3george/slash-admin
 基本架构学习
 
 **react-admin-redux**
+
 项目地址: https://react-soybean.ohh-889.com/document/project
 redux 学习
 vite 配置学习
 逐步将此项目好的地方移植到react-admin项目上面去
 
 **redux-toolkit-demo**
+
 redux-toolkit使用案例
 逐步将此项目移动到react-admin项目上面
 
