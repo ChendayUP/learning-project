@@ -1,7 +1,7 @@
 # 目标
 此仓库放前端相关的各个学习的demo，每个学习内容完全搞懂一个项目就可以了，以后类似的项目也可以在相似的项目上面进行添加
 
-## react-admin-project
+## react
 学习react项目架构
 
 **react-admin**
