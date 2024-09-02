@@ -19,10 +19,10 @@ export function Counter() {
 
   const incrementValue = Number(incrementAmount) || 0;
 
-  const {value} = useSelector((store: any) => store.counter)
+  const couterState = useSelector((store: any) => store.counter)
   return (
     <div>
-      <div>counter: {value}</div>
+      <div>counter: {couterState.value}</div>
       <div className={styles.row}>
         <button
           className={styles.button}
