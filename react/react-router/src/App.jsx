@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate, HashRouter } from 'react-router-dom';
-
-import Home from './components/Home';
-import About from './components/About';
-import Login from './components/Login';
 import AppLayout from './components/AppLayout';
 import ProtectedRoute from './components/ProtectedRoute'
 import NotFound from './components/NotFound';
+
+import routeList from './route/route';
+
+import GoodsList2 from './pages/goodsList2'
+import GoodsCounter from './pages/goodsCounter'
+import GoodsDetail from './pages/goodsDetail'
 function App() {
   return (
     // <BrowserRouter>
@@ -17,9 +19,20 @@ function App() {
           </ProtectedRoute>
         }>
           <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home />} ></Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
+          {
+            routeList.map((route) => {
+              if (route.children) {
+                return <Route path={route.path} key={route.path} element={<route.element children={route.children}/>} />
+              } else {
+                return <Route path={route.path} key={route.path} element={<route.element />} />
+              }
+            })
+          }
+        <Route path="/goods2" element={<GoodsList2 />}>
+          <Route path="/goods2" element={<Navigate to="/goods2/counter" replace />} />
+          <Route path='counter' element={<GoodsCounter />} />
+          <Route path='detail' element={<GoodsDetail /> } />
+        </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
