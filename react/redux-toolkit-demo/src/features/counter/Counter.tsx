@@ -20,6 +20,10 @@ export function Counter() {
   const incrementValue = Number(incrementAmount) || 0;
 
   const couterState = useSelector((store: any) => store.counter)
+  function handleDecrement() {
+    console.log(decrement())
+    dispatch(decrement())
+  }
   return (
     <div>
       <div>counter: {couterState.value}</div>
@@ -27,7 +31,8 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          // onClick={() => dispatch(decrement())}
+          onClick={handleDecrement}
         >
           -
         </button>
@@ -49,7 +54,7 @@ export function Counter() {
         />
         <button
           className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
+          onClick={() => dispatch(incrementByAmount({count: incrementValue}))}
         >
           Add Amount
         </button>

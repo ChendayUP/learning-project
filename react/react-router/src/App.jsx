@@ -29,7 +29,7 @@ function App() {
             })
           }
         <Route path="/goods2" element={<GoodsList2 />}>
-          <Route path="/goods2" element={<Navigate to="/goods2/counter" replace />} />
+          <Route index element={<Navigate to="/goods2/counter" replace />} />
           <Route path='counter' element={<GoodsCounter />} />
           <Route path='detail' element={<GoodsDetail /> } />
         </Route>

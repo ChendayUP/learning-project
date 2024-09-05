@@ -14,7 +14,7 @@ function GoodsList({ children }) {
         };
       }}>商品列表</NavLink>
       <Routes>
-        <Route path="/" element={<Navigate to="/goods/counter" replace />} />
+        <Route index element={<Navigate to="/goods/counter" replace />} />
         {
           children.map((route) => {
             return <Route path={route.path} key={route.path} element={<route.element />}></Route>

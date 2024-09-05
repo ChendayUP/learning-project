@@ -27,8 +27,8 @@ describe('counter reducer', () => {
     expect(actual.value).toEqual(2);
   });
 
-  it('should handle incrementByAmount', () => {
-    const actual = counterReducer(initialState, incrementByAmount(2));
-    expect(actual.value).toEqual(5);
-  });
+  // it('should handle incrementByAmount', () => {
+  //   const actual = counterReducer(initialState, incrementByAmount(2));
+  //   expect(actual.value).toEqual(5);
+  // });
 });

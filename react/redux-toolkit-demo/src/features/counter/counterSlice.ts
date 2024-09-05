@@ -25,7 +25,7 @@ export const incrementAsync = createAsyncThunk(
     return response.data;
   }
 );
-
+// 创建一个片段，每个片段就是一个redux
 export const counterSlice = createSlice({
   name: 'counter',
   initialState,
@@ -42,8 +42,9 @@ export const counterSlice = createSlice({
       state.value -= 1;
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    incrementByAmount: (state, action: PayloadAction<{count: number}>) => {
+      console.log("action", action)
+      state.value += action.payload.count;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -63,7 +64,9 @@ export const counterSlice = createSlice({
       });
   },
 });
-
+// actions 执行后 实际生成的是 {type：xxx, playload: xxxx} 对象，和之前保持一致了
+// decrement() => {type："counter/decrement", playload: undefined}
+// dispatch(decrement()) => dispatch({type："counter/decrement", playload: undefined})
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
@@ -77,7 +80,7 @@ export const incrementIfOdd = (amount: number): AppThunk =>
   (dispatch, getState) => {
     const currentValue = selectCount(getState());
     if (currentValue % 2 === 1) {
-      dispatch(incrementByAmount(amount));
+      dispatch(incrementByAmount({count: amount}));
     }
   };
 
