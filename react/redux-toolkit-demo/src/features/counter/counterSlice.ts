@@ -62,7 +62,7 @@ export const counterSlice = createSlice({
       .addCase(incrementAsync.rejected, (state) => {
         state.status = 'failed';
       });
-  },
+  }
 });
 // actions 执行后 实际生成的是 {type：xxx, playload: xxxx} 对象，和之前保持一致了
 // decrement() => {type："counter/decrement", playload: undefined}
@@ -78,6 +78,8 @@ export const selectCount = (state: RootState) => state.counter.value;
 // Here's an example of conditionally dispatching actions based on current state.
 export const incrementIfOdd = (amount: number): AppThunk =>
   (dispatch, getState) => {
+    console.log(getState)
+    console.log(JSON.stringify(getState()))
     const currentValue = selectCount(getState());
     if (currentValue % 2 === 1) {
       dispatch(incrementByAmount({count: amount}));
