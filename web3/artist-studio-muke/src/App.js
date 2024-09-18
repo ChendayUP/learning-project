@@ -19,7 +19,7 @@ function App() {
   const readMessage = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     await provider.send("eth_requestAccounts", []);
-    const lock = new ethers.Contract("0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512", Lock.abi, provider);
+    const lock = new ethers.Contract("0xC3C226Da7C3f5b100797604D64674e3bD1840Fe3", Lock.abi, provider);
     const message = await lock.message();
     alert(message)
 
@@ -33,7 +33,7 @@ function App() {
 
     const signer = provider.getSigner()
 
-    let lock = new ethers.Contract("0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512", Lock.abi, signer);
+    let lock = new ethers.Contract("0xC3C226Da7C3f5b100797604D64674e3bD1840Fe3", Lock.abi, signer);
 
     let transaction = await lock.connect(signer).setMessage("world hello!");
     let tx = await transaction.wait(1);

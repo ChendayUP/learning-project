@@ -45,7 +45,7 @@ type NetworkConfiguration = {
     
 
     chainId: 0x539,
-    nftAddress: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    nftAddress: "0xC3C226Da7C3f5b100797604D64674e3bD1840Fe3",
 
     params: [{
         chainId: '0x0539',

@@ -9,16 +9,13 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract ArtistNFT is ERC721URIStorage, ERC721Enumerable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
- 
-    constructor() ERC721("ArtistNFT", "AN") {
-       
-    }
 
-    function mint(address artist, string memory tokenURI)
-        public
-        returns (uint256)
-    {
-  
+    constructor() ERC721("ArtistNFT", "AN") {}
+
+    function mint(
+        address artist,
+        string memory tokenURI
+    ) public returns (uint256) {
         uint256 newItemId = _tokenIds.current();
         _mint(artist, newItemId);
         _setTokenURI(newItemId, tokenURI);
@@ -33,31 +30,24 @@ contract ArtistNFT is ERC721URIStorage, ERC721Enumerable {
         uint256 firstTokenId,
         uint256 batchSize
     ) internal override(ERC721, ERC721Enumerable) {
-        super._beforeTokenTransfer(from, to, firstTokenId,batchSize);
+        super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
     }
 
-    function _burn(uint256 tokenId)
-        internal
-        override(ERC721, ERC721URIStorage)
-    {
+    function _burn(
+        uint256 tokenId
+    ) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721Enumerable)
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view override(ERC721, ERC721Enumerable) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return ERC721URIStorage.tokenURI(tokenId);
     }
 }
