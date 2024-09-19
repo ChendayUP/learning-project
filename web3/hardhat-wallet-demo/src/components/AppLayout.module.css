@@ -1,0 +1,13 @@
+.active {
+  color: blue
+}
+
+.inActive {
+  color: red
+}
+
+.container {
+  :global a {
+    margin:0 3px;
+  }
+}
