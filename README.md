@@ -21,6 +21,11 @@ vite 配置学习
 redux-toolkit使用案例
 逐步将此项目移动到react-admin项目上面
 
+## web3
+学习 web3 的相关项目
+钱包项目
+
+
 ## next.js
 学习 next.js 项目架构
 
