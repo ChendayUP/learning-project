@@ -24,6 +24,7 @@ function AppLayout() {
 
   return (
     <>
+    <div>
       <NavLink
         to="/home"
         style={({ isActive, isPending, isTransitioning }) => {
@@ -70,6 +71,19 @@ function AppLayout() {
       >
         商品2
       </NavLink>
+      </div>
+      <div>
+      <NavLink
+        to="/wallet/home"
+        style={({ isActive }) => {
+          return {
+            color: isActive ? "red" : "black",
+          };
+        }}
+      >
+        合约操作
+      </NavLink>
+      </div>
       <Outlet />
     </>
   );
