@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import ReactJson from 'react18-json-view'
+import 'react18-json-view/src/style.css'
 import { Button, Card, Col, Input, InputNumber, Layout, Modal, Row, Spin } from 'antd';
 
 import CxxToken from '../../build/CxxToken.json';
@@ -8,7 +9,7 @@ import CxxToken from '../../build/CxxToken.json';
 const { Content } = Layout;
 
 function WalletHome() {
-  console.log(import.meta.env)
+  // console.log(import.meta.env)
   const {
     VITE_REACT_APP_CONTARCT_ADDRESS,
     VITE_REACT_APP_DEPLOYER,
@@ -35,6 +36,8 @@ function WalletHome() {
 
   const [txs, setTxs] = useState({})
 
+  const [eventList, setEventList] = useState([]);
+
   let provider = new ethers.JsonRpcProvider("http://localhost:8545")
   let wallet = new ethers.Wallet(VITE_REACT_APP_DEPLOYER_PRIVATE_KEY, provider);
   let contract = new ethers.Contract(VITE_REACT_APP_CONTARCT_ADDRESS, CxxToken.abi, provider) // Read-Only
@@ -58,24 +61,24 @@ function WalletHome() {
 
   // 合约总供应量
   async function getSupply() {
-    setSupply(await contractWithSigner.totalSupply().then((balance) => ethers.utils.formatEther(balance)))
+    setSupply(await contractWithSigner.totalSupply().then((balance) => ethers.formatEther(balance)))
   }
 
   // owner 余额
   async function getOwnerBalance() {
-    setOwnerBlance(await contractWithSigner.balanceOf(VITE_REACT_APP_DEPLOYER).then((balance) => ethers.utils.formatEther(balance)))
+    setOwnerBlance(await contractWithSigner.balanceOf(VITE_REACT_APP_DEPLOYER).then((balance) => ethers.formatEther(balance)))
   }
 
   // owner eth 余额
   async function getOwnerWalletBalance() {
     // setOwnerWalletBlance(await wallet.getBalance().then((balance) => ethers.utils.formatEther(balance)))
-    let balance = await provider.getBalance(VITE_REACT_APP_CONTARCT_ADDRESS).then((balance) => ethers.formatEther(balance))
+    let balance = await provider.getBalance(VITE_REACT_APP_DEPLOYER).then((balance) => ethers.formatEther(balance))
     setOwnerWalletBlance(balance)
   }
 
   // reciver 余额
   async function getReciverBalance() {
-    setReciverBlance(await contractWithSigner.balanceOf(VITE_REACT_APP_RECIVER).then((balance) => ethers.utils.formatEther(balance)))
+    setReciverBlance(await contractWithSigner.balanceOf(VITE_REACT_APP_RECIVER).then((balance) => ethers.formatEther(balance)))
   }
 
   // 查询数据
@@ -89,30 +92,96 @@ function WalletHome() {
     getReciverBalance()
 
     getOwnerWalletBalance()
+    getAddressTransfers();
   }
 
   // 发币
   const sendToken = async () => {
-    setLoading(true);
-    let numberOfTokens = ethers.utils.parseUnits(number.toString(), 18);
+    let numberOfTokens = ethers.parseUnits(number.toString(), 18);
     console.log(`numberOfTokens: ${numberOfTokens}`);
+    estimateAndShowGasCost('transfer', address, numberOfTokens)
+  }
+
+  const confirmSendToken = async () => {
+    setLoading(true);
+    let numberOfTokens = ethers.parseUnits(number.toString(), 18);
+    console.log(`numberOfTokens: ${numberOfTokens}`);
+
     const transaction = await contractWithSigner.transfer(address, numberOfTokens);
     await transaction.wait();
     console.log(`${number} Tokens successfully sent to ${address}`);
     setLoading(false)
     refetch()
   }
+  // 同时设置 Gas Limit 和 Gas 价格
+  const setupGasOptions = async (functionName, ...args) => {
+    const feeData = await provider.getFeeData();
+    const estimatedGas = await contract[functionName].estimateGas(...args);
+    const gasLimit = estimatedGas * BigInt(12) / BigInt(10);
+    return {
+      gasLimit: gasLimit,
+      maxFeePerGas: feeData.maxFeePerGas,
+      maxPriorityFeePerGas: feeData.maxPriorityFeePerGas
+    }
+  }
+
+  const estimateAndShowGasCost = async (functionName, ...args) => {
+    try {
+      // 1. 估算 gas 使用量
+      const gasEstimate = await contractWithSigner[functionName].estimateGas(...args);
+
+      // 2. 获取当前 gas 价格
+      // You should use (await provider.getFeeData()).gasPrice.
+      // Keep in mind only legacy networks have/use a gasPrice; 
+      // modern EIP-1559 networks instead use maxFeePerGas and maxPriorityFeePerGas.
+      const gasPrice = (await provider.getFeeData()).gasPrice
+
+      // 3. 计算总的 gas 成本
+      const gasCost = gasEstimate * gasPrice;
+
+      // 4. 将 wei 转换为 ether
+      const gasCostEther = ethers.formatEther(gasCost);
+
+      // 7. 使用 antd Modal 显示结果
+      Modal.confirm({
+        title: '估算的 Gas 费用',
+        content: (
+          <div>
+            <p>估算的 Gas 使用量: {gasEstimate.toString()} 单位</p>
+            <p>当前 Gas 价格: {ethers.formatUnits(gasPrice, 'gwei')} Gwei</p>
+            <p>总 Gas 成本: {gasCostEther} ETH</p>
+          </div>
+        ),
+        onOk() {
+          // 这里可以添加确认后的逻辑，比如执行实际的交易
+          console.log('用户确认了交易');
+          confirmSendToken()
+        },
+        onCancel() {
+          console.log('用户取消了交易');
+        },
+      });
+    } catch (error) {
+      Modal.error({
+        title: '估算 Gas 费用失败',
+        content: '无法估算 Gas 费用: ' + error.message,
+      });
+    }
+  }
 
   // 交易信息callback
   const onContractTransfer = (from, to, value, event) => {
-    if (!txs[event.transactionHash]) {
-      console.log(event.transactionHash, ethers.utils.formatUnits(value), new Date().getTime());
+    console.log('txs', txs)
+    console.log(event)
+    const { transactionHash } = event.log
+    if (!txs[transactionHash]) {
+      console.log(transactionHash, ethers.formatUnits(value), new Date().getTime());
       setTxs({
-        ...txs, [event.transactionHash]: {
+        ...txs, [transactionHash]: {
           from,
           to,
-          value: ethers.utils.formatUnits(value),
-          transactionHash: event.transactionHash
+          value: ethers.formatUnits(value),
+          transactionHash: transactionHash
         }
       })
     }
@@ -129,15 +198,65 @@ function WalletHome() {
     }
   }
 
+  // 点击交易hash显示交易详情
+  const showTranstionDetail = async ({ transactionHash }) => {
+    const tx = await provider.getTransaction(transactionHash)
+    setModal({
+      hash: transactionHash,
+      data: tx
+    })
+  }
+
+  const filterEvent = async () => {
+    const filter = contract.filters.Transfer();
+    const events = await contract.queryFilter(filter, startBlock, endBlock);
+  }
+
+  // 获取地址的event 历史
+  async function getAddressTransfers() {
+    const address = VITE_REACT_APP_DEPLOYER
+    const filter = contractWithSigner.filters.Transfer(address, null);
+    // 查询最近 10000 个区块
+    const currentBlock = await provider.getBlockNumber();
+    let fromBlock = currentBlock - 10000;
+    if (fromBlock < 0) fromBlock = 0
+    const events = await contractWithSigner.queryFilter(filter, fromBlock, currentBlock);
+
+    const eventList = events.map(event => {
+      if (event.args[0].toLowerCase() === address.toLowerCase()) {
+        console.log(`${address} sent ${event.args.value} tokens to ${event.args.to}`);
+        return `${address} sent ${event.args.value} tokens to ${event.args.to}`
+      } else {
+        console.log(`${address} received ${event.args.value} tokens from ${event.args.from}`);
+        return `${address} received ${event.args.value} tokens from ${event.args.from}`;
+      }
+    });
+    setEventList(eventList)
+  }
+
   useEffect(() => {
     refetch()
     contractWithSigner.on('Transfer', onContractTransfer)
+    // contractWithSigner.on('transfer', () => {
+    //   console.log(from, to, value, )
+    // })
+    contract.on('Transfer', (from, to, value, event) => {
+      console.log(from, to, value, event)
+    })
+    // contract.on('transfer', () => {
+    //   console.log(from, to, value)
+    // })
     return () => {
       contractWithSigner.removeListener('Transfer', () => {
         console.log('contractWithSigner removeListener Transfer ');
       })
     }
   }, [])
+
+  useEffect(() => {
+    console.log("Object.values(txs)", txs)
+    console.log("Object.values(txs)", Object.values(txs))
+  }, [txs])
 
   return (
     <Spin spinning={loading}>
@@ -176,10 +295,10 @@ function WalletHome() {
 
                 <div className='operate'>
                   <div style={{ marginTop: 16 }}>
-                    <Input prefix="收款地址：" value={VITE_REACT_APP_RECIVER} readOnly className="input" />
+                    <Input addonBefore="收款地址：" value={VITE_REACT_APP_RECIVER} readOnly className="input" />
                   </div>
                   <div style={{ marginTop: 16 }}>
-                    <InputNumber prefix="转账数量：" value={number} min={0} className="input" onChange={v => setNumber(v)} />
+                    <InputNumber addonBefore="转账数量：" value={number} min={0} className="input" onChange={v => setNumber(v)} />
                   </div>
 
                   <Button style={{ marginTop: 16 }} onClick={sendToken}>发币</Button>
@@ -208,15 +327,32 @@ function WalletHome() {
             </Col>
           </Row>
 
-          <Card className='tx' title="交易信息" style={{ overflowY: "auto" }}>
+          {/* <Card className='tx' title="交易信息" style={{ overflowY: "auto" }}>
             <ReactJson displayDataTypes={false} name={false} src={Object.values(txs)} onSelect={showTxDetail} />
+          </Card> */}
+          <Card className='tx' title="交易历史" style={{ overflowY: "auto", maxHeight: '200px' }}>
+            {
+              eventList.map((event, index) => {
+                return <div key={index}>{event}</div>
+              })
+            }
+          </Card>
+          <Card className='tx' title="交易信息" style={{ overflowY: "auto" }}>
+            {
+              Object.keys(txs).map(key => {
+                return <div key={key}>
+                  <pre>{JSON.stringify(txs[key], null, 2)}</pre>
+                  <button onClick={() => showTranstionDetail(txs[key])}>查看交易详细信息</button>
+                </div>
+              })
+            }
           </Card>
 
           <Modal
             centered
             destroyOnClose
             width={1000}
-            visible={modal && modal.hash}
+            open={modal && !!modal.hash}
             title={`交易信息：${modal?.hash}`}
             onOk={() => setModal({})}
             onCancel={() => setModal({})}
