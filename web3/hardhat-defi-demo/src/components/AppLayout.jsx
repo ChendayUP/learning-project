@@ -24,65 +24,75 @@ function AppLayout() {
 
   return (
     <>
-    <div>
-      <NavLink
-        to="/home"
-        style={({ isActive, isPending, isTransitioning }) => {
-          return {
-            fontWeight: isActive ? "bold" : "",
-            color: isActive ? "red" : "black",
-            viewTransitionName: isTransitioning ? "slide" : "",
-          };
-        }}
-      >
-        Home
-      </NavLink>
-      <NavLink
-        to="/about"
-        style={({ isActive, isPending, isTransitioning }) => {
-          return {
-            fontWeight: isActive ? "bold" : "",
-            color: isActive ? "red" : "black",
-            viewTransitionName: isTransitioning ? "slide" : "",
-          };
-        }}
-      >
-        About
-      </NavLink>
-      <NavLink
-        to="/goods"
-        style={({ isActive, isPending, isTransitioning }) => {
-          return {
-            fontWeight: isActive ? "bold" : "",
-            color: isActive ? "red" : "black",
-            viewTransitionName: isTransitioning ? "slide" : "",
-          };
-        }}
-      >
-        商品
-      </NavLink>
-      <NavLink
-        to="/goods2"
-        style={({ isActive }) => {
-          return {
-            color: isActive ? "red" : "black",
-          };
-        }}
-      >
-        商品2
-      </NavLink>
+      <div>
+        <NavLink
+          to="/home"
+          style={({ isActive, isPending, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "red" : "black",
+              viewTransitionName: isTransitioning ? "slide" : "",
+            };
+          }}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/about"
+          style={({ isActive, isPending, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "red" : "black",
+              viewTransitionName: isTransitioning ? "slide" : "",
+            };
+          }}
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/goods"
+          style={({ isActive, isPending, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "red" : "black",
+              viewTransitionName: isTransitioning ? "slide" : "",
+            };
+          }}
+        >
+          商品
+        </NavLink>
+        <NavLink
+          to="/goods2"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "black",
+            };
+          }}
+        >
+          商品2
+        </NavLink>
       </div>
       <div>
-      <NavLink
-        to="/wallet/home"
-        style={({ isActive }) => {
-          return {
-            color: isActive ? "red" : "black",
-          };
-        }}
-      >
-        合约操作
-      </NavLink>
+        <NavLink
+          to="/token/home"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "black",
+            };
+          }}
+        >
+          代币交易平台
+        </NavLink>
+        <NavLink
+          to="/token/home"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "black",
+            };
+          }}
+        >
+          NFT展示平台
+        </NavLink>
       </div>
       <Outlet />
     </>
