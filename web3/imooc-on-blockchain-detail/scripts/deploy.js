@@ -10,7 +10,7 @@ const { interface, bytecode } = require(contractPath)
 
 // const provider = new HDWalletProvider('shoe nut spy clap squeeze artefact sunny gorilla awake milk away lawsuit',
 //     'https://ropsten.infura.io/v3/4596285aa3b54016aec5caa075fd0976')
-const provider = new HDWalletProvider('general venue bunker beef suspect target mass solution badge orange please improve',
+const provider = new HDWalletProvider('',
         'https://sepolia.infura.io/v3/3090914428a041b091d679984ac43f8a')
 
 
