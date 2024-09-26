@@ -2,17 +2,19 @@
 pragma solidity ^0.8.4;
 
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+// import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract NFTMarketplace is ERC721URIStorage {
 
-    using Counters for Counters.Counter;
+    // using Counters for Counters.Counter;
     //_tokenIds variable has the most recent minted tokenId
-    Counters.Counter private _tokenIds;
+    // Counters.Counter private _tokenIds;
+    uint256 private _tokenIds;
     //Keeps track of the number of items sold on the marketplace
-    Counters.Counter private _itemsSold;
+    // Counters.Counter private _itemsSold;
+    uint256 private _itemsSold;
     //owner is the contract address that created the smart contract
     address payable owner;
     //The fee charged by the marketplace to be allowed to list an NFT
@@ -53,8 +55,9 @@ contract NFTMarketplace is ERC721URIStorage {
     }
 
     function getLatestIdToListedToken() public view returns (ListedToken memory) {
-        uint256 currentTokenId = _tokenIds.current();
-        return idToListedToken[currentTokenId];
+        // uint256 currentTokenId = _tokenIds.current();
+        // return idToListedToken[currentTokenId];
+        return idToListedToken[_tokenIds];
     }
 
     function getListedTokenForId(uint256 tokenId) public view returns (ListedToken memory) {
@@ -62,14 +65,17 @@ contract NFTMarketplace is ERC721URIStorage {
     }
 
     function getCurrentToken() public view returns (uint256) {
-        return _tokenIds.current();
+        // return _tokenIds.current();
+        return _tokenIds;
     }
 
     //The first time a token is created, it is listed here
     function createToken(string memory tokenURI, uint256 price) public payable returns (uint) {
         //Increment the tokenId counter, which is keeping track of the number of minted NFTs
-        _tokenIds.increment();
-        uint256 newTokenId = _tokenIds.current();
+        // _tokenIds.increment();
+        _tokenIds += 1;
+        // uint256 newTokenId = _tokenIds.current();
+        uint256 newTokenId = _tokenIds;
 
         //Mint the NFT with tokenId newTokenId to the address who called createToken
         _safeMint(msg.sender, newTokenId);
@@ -111,7 +117,8 @@ contract NFTMarketplace is ERC721URIStorage {
     
     //This will return all the NFTs currently listed to be sold on the marketplace
     function getAllNFTs() public view returns (ListedToken[] memory) {
-        uint nftCount = _tokenIds.current();
+        // uint nftCount = _tokenIds.current();
+        uint nftCount = _tokenIds;
         ListedToken[] memory tokens = new ListedToken[](nftCount);
         uint currentIndex = 0;
         uint currentId;
@@ -130,7 +137,8 @@ contract NFTMarketplace is ERC721URIStorage {
     
     //Returns all the NFTs that the current user is owner or seller in
     function getMyNFTs() public view returns (ListedToken[] memory) {
-        uint totalItemCount = _tokenIds.current();
+        // uint totalItemCount = _tokenIds.current();
+        uint totalItemCount = _tokenIds;
         uint itemCount = 0;
         uint currentIndex = 0;
         uint currentId;
@@ -163,7 +171,8 @@ contract NFTMarketplace is ERC721URIStorage {
         //update the details of the token
         idToListedToken[tokenId].currentlyListed = true;
         idToListedToken[tokenId].seller = payable(msg.sender);
-        _itemsSold.increment();
+        // _itemsSold.increment();
+        _itemsSold += 1;
 
         //Actually transfer the token to the new owner
         _transfer(address(this), msg.sender, tokenId);

@@ -83,15 +83,37 @@ function AppLayout() {
         >
           代币交易平台
         </NavLink>
+      </div>
+      <div>
         <NavLink
-          to="/token/home"
+          to="/nft/marketplace"
           style={({ isActive }) => {
             return {
               color: isActive ? "red" : "black",
             };
           }}
         >
-          NFT展示平台
+          NFT交易市场
+        </NavLink>
+        <NavLink
+          to="/nft/profile"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "black",
+            };
+          }}
+        >
+          个人主页
+        </NavLink>
+        <NavLink
+          to="/nft/sell"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "black",
+            };
+          }}
+        >
+          NFT创建
         </NavLink>
       </div>
       <Outlet />

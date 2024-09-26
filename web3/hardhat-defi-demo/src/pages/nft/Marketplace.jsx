@@ -1,9 +1,11 @@
 import Navbar from "./Navbar";
 import NFTTile from "./NFTTile";
-import MarketplaceJSON from "../Marketplace.json";
+import MarketplaceJSON from "./Marketplace.json";
+import MarketplaceAbi from '../../build/NFTMarketplace.json'
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { GetIpfsUrlFromPinata } from "../utils";
+import { GetIpfsUrlFromPinata } from "../../utils";
+import { ethers } from "ethers"
 
 export default function Marketplace() {
 const sampleData = [
@@ -39,10 +41,9 @@ const [data, updateData] = useState([]);
 const [dataFetched, updateFetched] = useState(false);
 
 async function getAllNFTs() {
-    const ethers = require("ethers");
     //After adding your Hardhat network to your metamask, this code will get providers and signers
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
     //Pull the deployed contract instance
     let contract = new ethers.Contract(MarketplaceJSON.address, MarketplaceJSON.abi, signer)
     //create an NFT Token
@@ -56,7 +57,7 @@ async function getAllNFTs() {
         let meta = await axios.get(tokenURI);
         meta = meta.data;
 
-        let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+        let price = ethers.formatUnits(i.price.toString(), 'ether');
         let item = {
             price,
             tokenId: i.tokenId.toNumber(),

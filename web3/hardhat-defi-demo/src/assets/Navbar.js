@@ -1,11 +1,15 @@
-import logo from "../../assets/logo_3.png"
-import fullLogo from "../../assets/full_logo.png"
+import logo from "../logo_3.png"
+import fullLogo from "../full_logo.png"
 import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
   Link,
+  useRouteMatch,
+  useParams,
 } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router"
-import { ethers } from 'ethers';
 
 function Navbar() {
   const [connected, toggleConnect] = useState(false)
@@ -13,8 +17,9 @@ function Navbar() {
   const [currAddress, updateAddress] = useState("0x")
 
   async function getAddress() {
-    const provider = new ethers.BrowserProvider(window.ethereum)
-    const signer = await provider.getSigner()
+    const ethers = require("ethers")
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner()
     const addr = await signer.getAddress()
     updateAddress(addr)
   }
@@ -64,12 +69,12 @@ function Navbar() {
 
   return (
     <div className="">
-      <nav>
-        <ul className="flex items-center  justify-between py-3 bg-transparent text-white pr-5">
+      <nav className="w-screen">
+        <ul className="flex items-end justify-between py-3 bg-transparent text-white pr-5">
           <li className="flex items-end ml-5 pb-2">
             <Link to="/">
               <img
-                src={logo}
+                src={fullLogo}
                 alt=""
                 width={120}
                 height={120}
@@ -80,7 +85,7 @@ function Navbar() {
               </div>
             </Link>
           </li>
-          <li className="">
+          <li className="w-2/6">
             <ul className="lg:flex justify-between font-bold mr-10 text-lg">
               {location.pathname === "/" ? (
                 <li className="border-b-2 hover:pb-0 p-2">
