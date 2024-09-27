@@ -10,8 +10,8 @@ import GoodsCounter from './pages/goodsCounter'
 import GoodsDetail from './pages/goodsDetail'
 function App() {
   return (
-    // <BrowserRouter>
-    <HashRouter>
+    <BrowserRouter>
+    {/* <HashRouter> */}
       <Routes>
         <Route element={
           <ProtectedRoute>
@@ -36,8 +36,8 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-      </HashRouter>
-    // </BrowserRouter>
+      {/* </HashRouter> */}
+    </BrowserRouter>
   );
 }
 export default App;

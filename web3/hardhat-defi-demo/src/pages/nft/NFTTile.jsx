@@ -7,7 +7,7 @@ import {
 
 function NFTTile (data) {
     const newTo = {
-        pathname:"/nftPage/"+data.data.tokenId
+        pathname:"/nft/detail/"+data.data.tokenId
     }
 
     const IPFSUrl = GetIpfsUrlFromPinata(data.data.image);

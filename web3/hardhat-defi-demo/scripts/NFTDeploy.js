@@ -12,10 +12,10 @@ async function main() {
 
   const data = {
     address: await marketplace.getAddress(),
-    abi: marketplace.interface.fragments
+    abi: marketplace.interface.formatJson()
   }
   // console.log(marketplace.getAddress())
-  // console.log(marketplace.interface)
+  // console.log(marketplace.interface.formatJson())
   // console.log(data)
   //This writes the ABI and address to the mktplace.json
   fs.writeFileSync('./src/pages/nft/Marketplace.json', JSON.stringify(data))

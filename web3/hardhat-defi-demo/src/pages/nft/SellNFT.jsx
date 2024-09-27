@@ -88,8 +88,8 @@ export default function SellNFT () {
             if(metadataURL === -1)
                 return;
             //After adding your Hardhat network to your metamask, this code will get providers and signers
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const signer = await provider.getSigner();
             disableButton();
             updateMessage("Uploading NFT(takes 5 mins).. please dont click anything!")
 
@@ -97,7 +97,7 @@ export default function SellNFT () {
             let contract = new ethers.Contract(Marketplace.address, Marketplace.abi, signer)
 
             //massage the params to be sent to the create NFT request
-            const price = ethers.utils.parseUnits(formParams.price, 'ether')
+            const price = ethers.parseUnits(formParams.price, 'ether')
             let listingPrice = await contract.getListPrice()
             listingPrice = listingPrice.toString()
 
@@ -109,7 +109,7 @@ export default function SellNFT () {
             enableButton();
             updateMessage("");
             updateFormParams({ name: '', description: '', price: ''});
-            window.location.replace("/")
+            window.location.replace("/nft/marketplace");
         }
         catch(e) {
             // alert( "Upload error"+e )

@@ -4,6 +4,7 @@ import MarketplaceJSON from "./Marketplace.json";
 import axios from "axios";
 import { useState } from "react";
 import NFTTile from "./NFTTile";
+import { ethers } from 'ethers';
 
 export default function Profile () {
     const [data, updateData] = useState([]);
@@ -11,12 +12,11 @@ export default function Profile () {
     const [address, updateAddress] = useState("0x");
     const [totalPrice, updateTotalPrice] = useState("0");
 
-    async function getNFTData(tokenId) {
-        const ethers = require("ethers");
+    async function getNFTData() {
         let sumPrice = 0;
         //After adding your Hardhat network to your metamask, this code will get providers and signers
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         const addr = await signer.getAddress();
 
         //Pull the deployed contract instance
@@ -35,10 +35,10 @@ export default function Profile () {
             let meta = await axios.get(tokenURI);
             meta = meta.data;
 
-            let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+            let price = ethers.formatUnits(i.price.toString(), 'ether');
             let item = {
                 price,
-                tokenId: i.tokenId.toNumber(),
+                tokenId: Number(i.tokenId),
                 seller: i.seller,
                 owner: i.owner,
                 image: meta.image,
@@ -55,18 +55,18 @@ export default function Profile () {
         updateTotalPrice(sumPrice.toPrecision(3));
     }
 
-    const params = useParams();
-    const tokenId = params.tokenId;
+    // const params = useParams();
+    // const tokenId = params.tokenId;
     if(!dataFetched)
-        getNFTData(tokenId);
+        getNFTData();
 
     return (
-        <div className="profileClass" style={{"min-height":"100vh"}}>
+        <div className="profileClass" style={{"minHeight":"100vh"}}>
             <Navbar></Navbar>
             <div className="profileClass">
             <div className="flex text-center flex-col mt-11 md:text-2xl text-white">
                 <div className="mb-5">
-                    <h2 className="font-bold">Wallet Address</h2>  
+                    <h2 className="font-bold">Wallet Address</h2>
                     {address}
                 </div>
             </div>

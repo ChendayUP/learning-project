@@ -18,7 +18,7 @@ const route = [
     {path: '/nft/marketplace', element: Marketplace},
     {path: '/nft/profile', element: Profile},
     {path: '/nft/sell', element: SellNFT},
-    {path: '/nft/detail', element: NFTPage},
+    {path: '/nft/detail/:tokenId', element: NFTPage},
     {version: 'v5', path: '/goods/*', element: GoodsList, children: [
       { path: 'counter', element: GoodsCounter},
       { path: 'detail', element: GoodsDetail}

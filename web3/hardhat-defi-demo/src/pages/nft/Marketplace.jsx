@@ -1,7 +1,6 @@
 import Navbar from "./Navbar";
 import NFTTile from "./NFTTile";
 import MarketplaceJSON from "./Marketplace.json";
-import MarketplaceAbi from '../../build/NFTMarketplace.json'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GetIpfsUrlFromPinata } from "../../utils";
@@ -60,7 +59,7 @@ async function getAllNFTs() {
         let price = ethers.formatUnits(i.price.toString(), 'ether');
         let item = {
             price,
-            tokenId: i.tokenId.toNumber(),
+            tokenId: Number(i.tokenId),
             seller: i.seller,
             owner: i.owner,
             image: meta.image,
