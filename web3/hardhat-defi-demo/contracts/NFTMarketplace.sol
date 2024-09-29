@@ -38,6 +38,9 @@ contract NFTMarketplace is ERC721URIStorage {
         bool currentlyListed
     );
 
+    // 添加一个事件来记录状态变化
+    event ListedStatusUpdated(uint256 indexed tokenId, bool currentlyListed, uint256 price);
+
     //This mapping maps tokenId to token info and is helpful when retrieving details about a tokenId
     mapping(uint256 => ListedToken) private idToListedToken;
 
@@ -118,8 +121,16 @@ contract NFTMarketplace is ERC721URIStorage {
     //This will return all the NFTs currently listed to be sold on the marketplace
     function getAllNFTs() public view returns (ListedToken[] memory) {
         // uint nftCount = _tokenIds.current();
+        uint itemCount = 0;
+        for(uint i=0; i < _tokenIds; i++)
+        {
+            if(idToListedToken[i+1].currentlyListed == true){
+                itemCount += 1;
+            }
+        }
+
+        ListedToken[] memory tokens = new ListedToken[](itemCount);
         uint nftCount = _tokenIds;
-        ListedToken[] memory tokens = new ListedToken[](nftCount);
         uint currentIndex = 0;
         uint currentId;
         //at the moment currentlyListed is true for all, if it becomes false in the future we will 
@@ -128,8 +139,11 @@ contract NFTMarketplace is ERC721URIStorage {
         {
             currentId = i + 1;
             ListedToken storage currentItem = idToListedToken[currentId];
-            tokens[currentIndex] = currentItem;
-            currentIndex += 1;
+            // 判断是否在售状态
+            if (currentItem.currentlyListed == true) {
+                tokens[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
         }
         //the array 'tokens' has the list of all NFTs in the marketplace
         return tokens;
@@ -169,7 +183,8 @@ contract NFTMarketplace is ERC721URIStorage {
         require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
         //update the details of the token
-        idToListedToken[tokenId].currentlyListed = true;
+        // 销售完后, 更新在售状态
+        idToListedToken[tokenId].currentlyListed = false;
         idToListedToken[tokenId].seller = payable(msg.sender);
         // _itemsSold.increment();
         _itemsSold += 1;
@@ -183,6 +198,27 @@ contract NFTMarketplace is ERC721URIStorage {
         payable(owner).transfer(listPrice);
         //Transfer the proceeds from the sale to the seller of the NFT
         payable(seller).transfer(msg.value);
+    }
+
+    function updateListedStatus(uint256 tokenId, bool currentlyListed, uint256 price) public payable {
+        ListedToken storage token = idToListedToken[tokenId];
+        require(token.tokenId != 0, "Token does not exist");
+        require(msg.sender == token.seller, "Only seller can change NFT list status");
+        require(token.currentlyListed != currentlyListed, "Listed status is already set to the given value");
+        
+        if (currentlyListed) {
+            require(msg.value == listPrice, "Must pay the listing fee");
+            _transfer(msg.sender, address(this), tokenId);
+            token.price = price;
+        } else {
+            require(address(this).balance >= listPrice, "Contract doesn't have enough balance to refund");
+            payable(msg.sender).transfer(listPrice);
+            _transfer(address(this), msg.sender, tokenId);
+        }
+        
+        token.currentlyListed = currentlyListed;
+        
+        emit ListedStatusUpdated(tokenId, currentlyListed, price);
     }
 
     //We might add a resell token function in the future
