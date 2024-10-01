@@ -49,7 +49,7 @@ async function handleRequest(req: NextRequest, method: string) {
     return NextResponse.json({ error: e.message }, { status: e.status ?? 500 });
   }
 }
-
+// 导出http method处理方法
 export const GET = (req: NextRequest) => handleRequest(req, "GET");
 export const POST = (req: NextRequest) => handleRequest(req, "POST");
 export const PUT = (req: NextRequest) => handleRequest(req, "PUT");
