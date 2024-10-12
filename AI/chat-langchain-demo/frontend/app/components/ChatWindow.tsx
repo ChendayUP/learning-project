@@ -34,8 +34,9 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const MODEL_TYPES = ["openai_gpt_4o_mini", "anthropic_claude_3_haiku"];
 
-const defaultLlmValue =
-  MODEL_TYPES[Math.floor(Math.random() * MODEL_TYPES.length)];
+// const defaultLlmValue =
+//   MODEL_TYPES[Math.floor(Math.random() * MODEL_TYPES.length)];
+const defaultLlmValue = "google_gemini_pro"
 
 const getAssistantId = async (client: Client) => {
   const response = await client.assistants.search({
