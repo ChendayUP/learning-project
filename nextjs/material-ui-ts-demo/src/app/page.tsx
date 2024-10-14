@@ -12,7 +12,7 @@ export default function Home() {
   const LinkList = [
     { href: '/about', text: 'Go to the about page' },
     { href: '/dynamicColor', text: 'Go to the dynamic Color Page' },
-    { href: '/Container', text: 'Go to the Container Page' }
+    { href: '/container', text: 'Go to the Container Page' }
   ]
 
   return (
