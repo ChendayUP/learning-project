@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    print(session)
     if 'username' in session:
         return f'Logged in as {session["username"]}'
     return 'You are not logged in'
