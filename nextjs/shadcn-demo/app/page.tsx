@@ -21,6 +21,8 @@ export default function Home() {
             .
           </li>
           <li>Save and see your changes instantly.</li>
+          <li>Save and see your changes instantly.</li>
+          <li>Save and see your changes instantly.</li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
@@ -93,7 +95,24 @@ export default function Home() {
             width={16}
             height={16}
           />
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
           Go to nextjs.org →
+          Go to nextjs.org →
+          Go to nextjs.org →
+
         </a>
       </footer>
     </div>
