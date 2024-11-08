@@ -24,4 +24,9 @@
   "i18n-ally.sortKeys": true,
   "i18n-ally.sourceLanguage": "en_US",
   "i18n-ally.displayLanguage": "zh_CN",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#600714",
+    "titleBar.activeBackground": "#860A1C",
+    "titleBar.activeForeground": "#FFFBFC"
+  },
 }

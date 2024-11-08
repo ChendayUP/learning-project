@@ -19,5 +19,10 @@
   "prettier.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "unocss.root": ["./"],
-  "i18n-ally.sourceLanguage": "zh-cn"
+  "i18n-ally.sourceLanguage": "zh-cn",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#043608",
+    "titleBar.activeBackground": "#064C0C",
+    "titleBar.activeForeground": "#EFFEF0"
+  }
 }
