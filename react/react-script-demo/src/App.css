@@ -36,3 +36,111 @@
     transform: rotate(360deg);
   }
 }
+
+.expandable-list {
+  width: 300px;
+  margin: 20px;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #333;
+  margin-right: 10px;
+  transition: transform 0.3s;
+}
+
+.list-header.expanded .triangle {
+  transform: rotate(90deg);
+}
+
+.list-content {
+  border: 1px solid #eee;
+}
+
+.list-item {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  width: 100%;
+  position: relative;
+}
+
+.item-title {
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+  width: 100%;
+  transition: width 0.2s;
+}
+
+.copy-button {
+  visibility: hidden;
+  opacity: 0;
+  padding: 4px 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  position: absolute;
+  right: 0;
+  white-space: nowrap;
+}
+
+.list-item:hover .copy-button {
+  visibility: visible;
+  opacity: 1;
+}
+
+.list-item:hover .item-title {
+  width: calc(100% - 80px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-button:hover {
+  background-color: #f0f0f0;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.item-status {
+  color: #666;
+}
+
+.item-time {
+  color: #999;
+}
