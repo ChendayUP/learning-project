@@ -1,0 +1,67 @@
+2025-02-24 20:47:16,702 - INFO - Logger initialized, log directory: /Users/godlikeonline/Documents/work_learning/learning-project/AI/CursorPro-MacOS-Intel/logs
+2025-02-24 20:47:17,250 - ERROR - 版本号 0.43.6 小于最小要求 0.45.0
+2025-02-24 20:47:17,250 - INFO - 
+=== 初始化程序 ===
+2025-02-24 20:47:17,250 - INFO - 开始退出Cursor...
+2025-02-24 20:47:17,333 - INFO - 未发现运行中的 Cursor 进程
+2025-02-24 20:50:21,209 - INFO - Logger initialized, log directory: /Users/godlikeonline/Documents/work_learning/learning-project/AI/CursorPro-MacOS-Intel/logs
+2025-02-24 20:50:22,315 - INFO - 
+=== 初始化程序 ===
+2025-02-24 20:50:22,315 - INFO - 开始退出Cursor...
+2025-02-24 20:50:22,529 - INFO - 未发现运行中的 Cursor 进程
+2025-02-24 20:50:27,529 - INFO - 正在初始化浏览器...
+2025-02-24 20:50:27,606 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:27,607 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:27,611 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:18951
+2025-02-24 20:50:27,815 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (2): 127.0.0.1:18951
+2025-02-24 20:50:28,029 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (3): 127.0.0.1:18951
+2025-02-24 20:50:28,244 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (4): 127.0.0.1:18951
+2025-02-24 20:50:28,460 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (5): 127.0.0.1:18951
+2025-02-24 20:50:28,692 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (6): 127.0.0.1:18951
+2025-02-24 20:50:28,895 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (7): 127.0.0.1:18951
+2025-02-24 20:50:29,099 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (8): 127.0.0.1:18951
+2025-02-24 20:50:29,312 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (9): 127.0.0.1:18951
+2025-02-24 20:50:29,517 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (10): 127.0.0.1:18951
+2025-02-24 20:50:30,951 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:18951 "GET /json HTTP/1.1" 200 1248
+2025-02-24 20:50:30,959 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:30,959 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:30,961 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:18951
+2025-02-24 20:50:31,201 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:18951 "GET /json/version HTTP/1.1" 200 430
+2025-02-24 20:50:31,819 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:31,820 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:31,820 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:18951
+2025-02-24 20:50:31,830 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:18951 "GET /json HTTP/1.1" 200 1248
+2025-02-24 20:50:31,832 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:31,832 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:31,833 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:18951
+2025-02-24 20:50:31,842 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:18951 "GET /json HTTP/1.1" 200 1248
+2025-02-24 20:50:33,931 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:33,932 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:33,935 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:57572
+2025-02-24 20:50:34,143 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (2): 127.0.0.1:57572
+2025-02-24 20:50:34,349 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (3): 127.0.0.1:57572
+2025-02-24 20:50:34,554 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (4): 127.0.0.1:57572
+2025-02-24 20:50:34,785 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (5): 127.0.0.1:57572
+2025-02-24 20:50:35,052 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (6): 127.0.0.1:57572
+2025-02-24 20:50:36,138 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:57572 "GET /json HTTP/1.1" 200 1248
+2025-02-24 20:50:36,140 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:36,140 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:36,147 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:57572
+2025-02-24 20:50:36,339 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:57572 "GET /json/version HTTP/1.1" 200 422
+2025-02-24 20:50:36,766 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:36,766 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:36,770 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:57572
+2025-02-24 20:50:36,831 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:57572 "GET /json HTTP/1.1" 200 1248
+2025-02-24 20:50:36,834 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:36,834 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Converted retries value: 0 -> Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-02-24 20:50:36,848 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] Starting new HTTP connection (1): 127.0.0.1:57572
+2025-02-24 20:50:36,880 - DEBUG - [开源项目：https://github.com/chengazhen/cursor-auto-free] http://127.0.0.1:57572 "GET /json HTTP/1.1" 200 1248
+2025-02-24 20:50:37,523 - INFO - 正在初始化邮箱验证模块...
+2025-02-24 20:50:37,526 - ERROR - 程序执行出现错误: 域名未配置，请在 .env 文件中设置 DOMAIN
+2025-02-24 20:50:37,529 - ERROR - Traceback (most recent call last):
+  File "cursor_pro_keep_alive.py", line 450, in <module>
+  File "get_email_code.py", line 12, in __init__
+  File "config.py", line 41, in __init__
+  File "config.py", line 85, in check_config
+ValueError: 域名未配置，请在 .env 文件中设置 DOMAIN
+
