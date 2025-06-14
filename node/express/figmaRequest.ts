@@ -18,6 +18,7 @@ export async function getFigmaFile(fileKey: string) {
   if (!process.env.FIGMA_TOKEN) {
     throw new Error('Missing FIGMA_TOKEN in environment variables');
   }
+  
 
   const url = `https://api.figma.com/v1/files/${fileKey}`;
   const headers = {
